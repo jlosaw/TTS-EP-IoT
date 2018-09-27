@@ -1,0 +1,19 @@
+#include "ChainableLED.h"     //include RGB library
+
+
+#define NUM_LEDS  1
+ChainableLED leds(D4, D5, NUM_LEDS);
+
+// This routine runs only once upon reset
+void setup()
+{
+  //accelemeter.init();                           // initialize the g-sensor
+  leds.setColorRGB(0, 0, 0, 0);                 // turn down the LED
+}
+
+// This routine loops forever
+void loop()
+{
+
+  leds.setColorRGB(0, 0, 0, 255);                 // 0 is the first LED in chain. next 3 are RGB values from 0-255
+}
