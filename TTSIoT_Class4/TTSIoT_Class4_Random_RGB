@@ -1,0 +1,40 @@
+//This program uses the random number generator to
+#include "ChainableLED.h"     //include RGB library
+
+
+#define NUM_LEDS  1
+ChainableLED leds(D4, D5, NUM_LEDS);
+
+//define random numbers as long for the input into the LED
+long randNumberR;
+long randNumberG;
+long randNumberB;
+
+// This routine runs only once upon reset
+void setup()
+{
+    leds.setColorRGB(0, 0, 0, 0);                 // turn down the LED
+}
+
+// This routine loops forever
+void loop()
+{
+  randNumberR = random(0, 255);    //sets the red value to anywhere between 0 and 255
+  randNumberG = random(0, 255);
+  randNumberB = random(0, 255);     // try tightening these up to stay closer to a single color
+
+
+  Serial.print("red: ");
+  Serial.println(randNumberR);
+  Serial.print("green: ");
+  Serial.println(randNumberG);
+  Serial.print("blue: ");
+  Serial.println(randNumberB);
+
+// set LED RGB values to those of the random number
+
+  leds.setColorRGB(0, randNumberR, randNumberG, randNumberB);
+
+  delay (2000);
+
+}
