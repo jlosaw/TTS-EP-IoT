@@ -1,0 +1,29 @@
+//This sketch shows how to drive the vibration motor
+//It is similar to an LED and requires no special libraries
+
+#include "application.h"
+
+// name the pins
+
+#define MOTORPIN A4
+#define LED D7
+// This routine runs only once upon reset
+void setup()
+{                   
+  pinMode(MOTORPIN, OUTPUT); 
+  pinMode(LED, OUTPUT);
+}
+
+// This routine loops forever
+void loop()
+{
+    digitalWrite(MOTORPIN, LOW);   
+    digitalWrite(LED, LOW);   
+    
+    
+  delay (1000);
+    digitalWrite(MOTORPIN, HIGH);                
+    digitalWrite(LED, HIGH);                
+ 
+  delay(1000);
+}
