@@ -33,7 +33,8 @@ void loop() {
     // read the analog pin
     analogvalue = analogRead(pot);
     
-    
+    Particle.publish("Analog Raw",String (analogvalue),PUBLIC);
+    //send the raw value from the sensor to Particle console
     
   if (analogvalue>anaThreshold) {
 
