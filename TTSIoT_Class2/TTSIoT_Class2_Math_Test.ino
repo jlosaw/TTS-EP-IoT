@@ -1,3 +1,5 @@
+//This sketch runs a few standard arithmatic operators to show how they are evaluated
+
 void setup() {
   int a = 2;
   int b = 7;
