@@ -22,7 +22,7 @@ void setup() {
 
 void loop() {
   // To blink the LED, first we'll turn it on...
-  digitalWrite(led1, HIGH);
+  digitalWrite(led, HIGH);
 
   // We'll leave it on for 1 second...
   delay(1000);
