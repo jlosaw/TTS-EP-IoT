@@ -1,5 +1,3 @@
-#include "application.h"
-
 // name the pins
 #define LIGHTPIN A0
 
