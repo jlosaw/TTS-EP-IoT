@@ -48,12 +48,12 @@ Particle.publish("Humidity",String (h),60,PRIVATE);
 //Publish an event if the temp goes out of spec
 
 if (f>hightemp) {
-        Particle.publish("JLO_Temp","high");
+        Particle.publish("TTS_Temp","high");
     }
     
     
 if (f<lowtemp) {
-        Particle.publish("JLO_Temp","low");
+        Particle.publish("TTS_Temp","low");
     }
 
 else {
