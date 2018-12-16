@@ -24,11 +24,6 @@ void setup()
 
 }
 
-
-/* Last time, we wanted to continously blink the LED on and off
-Since we're waiting for input through the cloud this time,
-we don't actually need to put anything in the loop */
-
 void loop()
 {
    // Nothing to do here
