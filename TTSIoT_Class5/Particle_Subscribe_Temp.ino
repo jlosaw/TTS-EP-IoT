@@ -1,66 +1,108 @@
+// This #include statement was automatically added by the Particle IDE.
+#include <neopixel.h>
+
+
 // -----------------------------------------
 // Particle Subscribe
 // -----------------------------------------
-/* In this example, we will listen into the published events from the temperature read sketch and 
- sound the alarm if it gets too high or low
- */
+// In this example, we will listen into the published events 
+ 
 
 
-int led=D7;             //define LED pin
-int buzzer = D2;        //buzzer pin
+// IMPORTANT: Set pixel COUNT, PIN and TYPE
+#define PIXEL_PIN D5
+#define PIXEL_COUNT 12
+#define PIXEL_TYPE WS2812       //2812 is fine for ours, but if you use a different brand you need to look this up in the library file
+#define BRIGHTNESS 30           // 0 - 255 (note, these are super bright, so lower is fine for the bench)
 
+Adafruit_NeoPixel strip(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
+
+uint32_t Wheel(byte WheelPos);
 
 void setup() {
 
-    pinMode (led, OUTPUT);
-    pinMode (buzzer, OUTPUT);
-    
-    Particle.subscribe("JLO_Temp", myHandler);
-      
+    Particle.subscribe("JLO_Temp", tempHandler);
     // This is the event that we are subscribing too. It must correspond to the event name from temp sensor
+    strip.setBrightness(BRIGHTNESS);
+    strip.begin();
+    strip.show(); // Initialize all pixels to 'off'
 }
 
 
 void loop() {
-
+//nothing necessary here
   }
 
 
-// Now for the myHandler function, which is called when the cloud tells us that our buddy's event is published.
-void myHandler(const char *event, const char *data)
+// Now for the tempHandler function, which is called when the cloud tells us that our buddy's event is published.
+void tempHandler(const char *event, const char *data)
 {
-  /* Particle.subscribe handlers are void functions, which means they don't return anything.
-  They take two variables-- the name of your event, and any data that goes along with your event.
-  In this case, the event will be "JLO_temp" and the data will be "high" or "low"
-
-  Since the input here is a char, we can't do
-     data=="intact"
-    or
-     data=="broken"
-
-  chars just don't play that way. Instead we're going to strcmp(), which compares two chars.
-  If they are the same, strcmp will return 0.
+  /* 
+  We are going to look for the JLO_Temp variable and light up the neo-wheel corresponding to the temp
   */
+  
+  if (strcmp(data,"60")==0) {
+    strip.setPixelColor(0, 0,0,255);
+    strip.setPixelColor(1, 0,85,255);
+    strip.setPixelColor(2, 0,127,180);
+    strip.setPixelColor(3, 0,170,90);
+    strip.setPixelColor(4, 0,255,0);
+    strip.setPixelColor(5, 43,255,0);
+    strip.setPixelColor(6, 0,0,0);
+    strip.setPixelColor(7, 0,0,0);
+    strip.setPixelColor(8, 0,0,0);
+    strip.setPixelColor(9, 0,0,0);
+    strip.setPixelColor(10, 0,0,0);
+    strip.setPixelColor(11,0,0,0);
 
-  if (strcmp(data,"high")==0) {
-    // if temp is high, sound the alarm
-    digitalWrite(buzzer,HIGH);
-    digitalWrite(led,HIGH);
-    delay (2000);
-    digitalWrite(buzzer,LOW);
+    strip.show();
   }
-  else if (strcmp(data,"low")==0) {
-    // if temp is low, sound the alarm too
-    digitalWrite(buzzer,HIGH);
-    digitalWrite(led,HIGH);
-    delay (2000);
-    digitalWrite(buzzer,LOW);
+  
+
+  else if (strcmp(data,"70")==0) {
+    strip.setPixelColor(0, 0,0,255);
+    strip.setPixelColor(1, 0,85,255);
+    strip.setPixelColor(2, 0,127,180);
+    strip.setPixelColor(3, 0,170,90);
+    strip.setPixelColor(4, 0,255,0);
+    strip.setPixelColor(5, 43,255,0);
+    strip.setPixelColor(6, 85,213,0);
+    strip.setPixelColor(7, 128,170,0);
+    strip.setPixelColor(8, 0,0,0);
+    strip.setPixelColor(9, 0,0,0);
+    strip.setPixelColor(10, 0,0,0);
+    strip.setPixelColor(11,0,0,0);
+    
+    strip.show();
+  }
+  
+  
+  else if (strcmp(data,"80")==0) {
+    strip.setPixelColor(0, 0,0,255);
+    strip.setPixelColor(1, 0,85,255);
+    strip.setPixelColor(2, 0,127,180);
+    strip.setPixelColor(3, 0,170,90);
+    strip.setPixelColor(4, 0,255,0);
+    strip.setPixelColor(5, 43,255,0);
+    strip.setPixelColor(6, 85,213,0);
+    strip.setPixelColor(7, 128,170,0);
+    strip.setPixelColor(8, 255,128,0);
+    strip.setPixelColor(9, 255,85,0);
+    strip.setPixelColor(10, 0,0,0);
+    strip.setPixelColor(11,0,0,0);
+    strip.show();
   }
   
   else {
-    digitalWrite(buzzer,LOW); 
-    digitalWrite(led,LOW);
-    
-    
+    colorWipe(strip.Color(255, 0, 0), 50); // Red
+ 
+  }
+}
+
+void colorWipe(uint32_t c, uint8_t wait) {
+  for(uint16_t i=0; i<strip.numPixels(); i++) {
+    strip.setPixelColor(i, c);
+    strip.show();
+    delay(wait);
   }
 }
