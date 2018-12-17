@@ -3,10 +3,10 @@
 // -----------------------------------------
 // Analog Value to Particle Variable
 // -----------------------------------------
-/* In this example, we're going to build on the particle variable example and add a continiually 
+/* In this example, we're going to add a continiually 
 updating state based on an analog reading. This will be pushed to the Particle console via 
 a simple command called particle publish.
-We will start with the rotary pot, but then we can try the light sensor on the same pin.
+We will start with the rotary pot.
 */
 
 int led=D7;         //define LED pin
@@ -17,7 +17,7 @@ int anaThreshold;   // This is a value halfway between ledOnValue and ledOffValu
 
 void setup() {
 
-    pinMode(pot,INPUT);  // Our photoresistor pin is input (reading the photoresistor)
+    pinMode(pot,INPUT);  // Our potentiometer pin is input (reading the photoresistor)
     pinMode (led, OUTPUT);
     
     // We are going to declare a Particle.variable() here so that we can access the value of the photoresistor from the cloud.
