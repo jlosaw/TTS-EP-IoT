@@ -30,9 +30,6 @@ Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_K
 
 Adafruit_MQTT_Publish voltage = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/TTS Analog"); 
 
-// Setup a feed called 'onoff' for subscribing to changes. 
-Adafruit_MQTT_Subscribe onoffbutton = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/onoff"); 
-
 
 /*************************** Sketch Code ************************************/ 
 int x = 0; 
@@ -42,8 +39,7 @@ void setup()
    delay(10); 
    pinMode(A0,INPUT); 
    Serial.println(F("Adafruit MQTT demo")); 
-   // Setup MQTT subscription for onoff feed. 
-   mqtt.subscribe(&onoffbutton); 
+    
 } 
 void loop() 
 { 
